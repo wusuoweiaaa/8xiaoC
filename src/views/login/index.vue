@@ -46,16 +46,17 @@
           />
         </span> -->
       </el-form-item>
-      <el-form-item prop="password">
+      <el-form-item prop="mobile">
        <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
         <el-input
           :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
+          ref="mobile"
+          type="number"
+          v-model="loginForm.mobile"
           placeholder="输入手机号码"
-          name="password"
+          name="mobile"
           tabindex="2"
           auto-complete="on"
           @keyup.enter.native="handleLogin"
@@ -88,14 +89,14 @@
 </template>
 
 <script>
-import { validMobile } from "@/utils/validate";
+import { validMobile, validateCert } from "@/utils/validate";
 import { login } from "@/api/user";
-
+import {strMd5} from "@/utils/index";
 export default {
   name: "Login",
   data() {
-    const validateCert = (rule, value, callback) => {
-      if (!validMobile(value)) {
+    const validateCertReg = (rule, value, callback) => {
+      if (!validateCert(value)) {
         callback(new Error("请输入正确的身份证号码"));
       } else {
         callback();
@@ -103,7 +104,7 @@ export default {
     };
     const validMobileReg = (rule, value, callback) => {
       if (!validMobile(value)) {
-        callback(new Error("The password can not be less than 6 digits"));
+        callback(new Error("请输入正确的手机号码"));
       } else {
         callback();
       }
@@ -114,14 +115,14 @@ export default {
         password: "",
         name:"",
         mobile: "",
-         type: "C"
+        type: "C"
       },
       loginRules: {
         username: [
-          { required: true, trigger: "blur", message: '请输入身份证号码',},
+          { required: true, trigger: "blur", validator: validateCertReg},
         ],
         mobile: [
-          { required: true, trigger: "blur", message: '请输入手机号', },
+          { required: true, trigger: "blur", validator: validMobileReg },
         ],
         name: [
           { required: true, trigger: "blur",  message: '请输入姓名',},
@@ -155,6 +156,9 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true;
+          let name = this.loginForm.name;
+          this.loginForm.password = strMd5(name, 32);
+          console.log(this.loginForm);
           login(this.loginForm)
             .then((res) => {
               window.localStorage.setItem('USER_INFO', res.data)

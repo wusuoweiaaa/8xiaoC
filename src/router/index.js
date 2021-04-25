@@ -7,25 +7,6 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /**
- * Note: sub-menu only appear when route children.length >= 1
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
- *                                if not set alwaysShow, when item has more than one children route,
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
- * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
-    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
-    icon: 'svg-name'             the icon show in the sidebar
-    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
-  }
- */
-
-/**
  * constantRoutes
  * a base page that does not have permission requirements
  * all roles can be accessed
@@ -37,7 +18,7 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-  
+
   {
     path: '/login',
     component: () => import('@/views/login/index'),
@@ -53,114 +34,100 @@ export const constantRoutes = [
   {
     path: '/dashboard',
     component: Layout,
-    name: '首页',
+    name: '/dashboard',
     meta: { title: '首页', icon: 'dashboard' },
     children: [{
       path: 'index',
-      name: '首页',
+      name: 'index',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
+
   {
     path: '/health-cert',
-    component:()  => import('@/views/health-cert/index'),
-    name: '健康证添加',
-    meta: { title: '健康证添加', icon: 'example' },
+    component: Layout,
+    name: '/health-cert',
+    meta: { title: '健康证', icon: 'dashboard' },
+    children: [{
+      path: 'index',
+      name: 'health-cert-index',
+      meta: { title: '健康证添加', icon: 'example' },
+      component: () => import('@/views/health-cert/index'),
+    },
+    {
+      path: 'detail',
+      component: () => import('@/views/health-cert/detail'),
+      name: 'health-cert-detail',
+      meta: { title: '健康证详情', icon: 'example' },
+    },
+    ]
   },
 
-  // {
-  //   path: '',
-  //   component: Layout,
-  //   redirect: '/admin/index',
-  //   name: '权限管理',
-  //   meta: { title: '权限管理', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'admin/index',
-  //       name: '管理员列表',
-  //       component: () => import('@/views/admin/index'),
-  //       meta: { title: '管理员列表', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'admin/add',
-  //       name: '添加管理员',
-  //       component: () => import('@/views/admin/add'),
-  //       hidden: true,
-  //     },
-  //     {
-  //       path: 'role/index',
-  //       name: '角色管理',
-  //       component: () => import('@/views/role/index'),
-  //       meta: { title: '角色管理', icon: 'user' }
-  //     },{
-  //       path: 'role/add',
-  //       name: '添加角色',
-  //       component: () => import('@/views/role/add'),
-  //       hidden: true,
-  //     },
-  //     {
-  //       path: 'route/index',
-  //       name: '路由管理',
-  //       component: () => import('@/views/route/index'),
-  //       meta: { title: '路由管理', icon: 'tree' }
-  //     },{
-  //       path: 'route/add',
-  //       name: '添加路由',
-  //       component: () => import('@/views/route/add'),
-  //       hidden: true,
-  //     }
-  //   ]
-  // },
+  {
+    path: '/food-cert',
+    component: Layout,
+    name: '/food-cert',
+    meta: { title: '食品经营许可证', icon: 'example' },
+    children: [{
+      path: 'index',
+      component: () => import('@/views/food-cert/index'),
+      name: 'food-cert-index',
+      meta: { title: '食品经营许可证添加', icon: 'example' },
+    },
+    {
+      path: 'detail',
+      component: () => import('@/views/food-cert/detail'),
+      name: 'food-cert-detail',
+      meta: { title: '食品经营许可证添加', icon: 'example' },
+    },
+    ]
+  },
 
-  // {
-  //   path: '',
-  //   component: Layout,
-  //   redirect: '/article/index',
-  //   name: '文章管理',
-  //   children: [{
-  //     path: 'article/index',
-  //     name: '文章管理',
-  //     component: () => import('@/views/article/index'),
-  //     meta: { title: '文章管理', icon: 'dashboard' }
-  //   }]
-  // },
+  {
+    path: '/public-cert',
+    component: Layout,
+    name: '/public-cert',
+    meta: { title: '公共场所卫生许可证', icon: 'example' },
+    children: [{
+      path: 'index',
+      component: () => import('@/views/public-cert/index'),
+      name: 'public-cert-index',
+      meta: { title: '公共场所卫生许可证添加', icon: 'example' },
+    },
+    {
+      path: 'detail',
+      component: () => import('@/views/public-cert/detail'),
+      name: 'public-cert-detail',
+      meta: { title: '公共场所卫生许可证添加', icon: 'example' },
+    },
+    ]
+  },
 
-  // {
-  //   path: '',
-  //   component: Layout,
-  //   redirect: '/user/index',
-  //   name: '用户管理',
-  //   children: [{
-  //     path: '/user/index',
-  //     name: '用户管理',
-  //     component: () => import('@/views/user/index'),
-  //     meta: { title: '用户管理', icon: 'user' }
-  //   }]
-  // },
+  
+  {
+    path: '/water-cert',
+    component: Layout,
+    name: '/water-cert',
+    meta: { title: '公共场所卫生许可证', icon: 'example' },
+    children: [{
+      path: 'index',
+      component: () => import('@/views/water-cert/index'),
+      name: 'water-cert-index',
+      meta: { title: '供水单位卫生许可证添加', icon: 'example' },
+    },
+    {
+      path: 'detail',
+      component: () => import('@/views/water-cert/detail'),
+      name: 'water-cert-detail',
+      meta: { title: '供水单位卫生许可证添加', icon: 'example' },
+    },
+    ]
+  },
 
-  // {
-  //   path: '/example',
-  //   component: Layout,
-  //   redirect: '/example/table',
-  //   name: 'Example',
-  //   meta: { title: 'Example', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'table',
-  //       name: 'Table',
-  //       component: () => import('@/views/table/index'),
-  //       meta: { title: 'Table', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'tree',
-  //       name: 'Tree',
-  //       component: () => import('@/views/tree/index'),
-  //       meta: { title: 'Tree', icon: 'tree' }
-  //     }
-  //   ]
-  // },
+  
 
+  
   {
     path: '/form',
     component: Layout,
@@ -173,76 +140,6 @@ export const constantRoutes = [
       }
     ]
   },
-
-  // {
-  //   path: '/nested',
-  //   component: Layout,
-  //   redirect: '/nested/menu1',
-  //   name: 'Nested',
-  //   meta: {
-  //     title: 'Nested',
-  //     icon: 'nested'
-  //   },
-  //   children: [
-  //     {
-  //       path: 'menu1',
-  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
-  //       name: 'Menu1',
-  //       meta: { title: 'Menu1' },
-  //       children: [
-  //         {
-  //           path: 'menu1-1',
-  //           component: () => import('@/views/nested/menu1/menu1-1'),
-  //           name: 'Menu1-1',
-  //           meta: { title: 'Menu1-1' }
-  //         },
-  //         {
-  //           path: 'menu1-2',
-  //           component: () => import('@/views/nested/menu1/menu1-2'),
-  //           name: 'Menu1-2',
-  //           meta: { title: 'Menu1-2' },
-  //           children: [
-  //             {
-  //               path: 'menu1-2-1',
-  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-  //               name: 'Menu1-2-1',
-  //               meta: { title: 'Menu1-2-1' }
-  //             },
-  //             {
-  //               path: 'menu1-2-2',
-  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-  //               name: 'Menu1-2-2',
-  //               meta: { title: 'Menu1-2-2' }
-  //             }
-  //           ]
-  //         },
-  //         {
-  //           path: 'menu1-3',
-  //           component: () => import('@/views/nested/menu1/menu1-3'),
-  //           name: 'Menu1-3',
-  //           meta: { title: 'Menu1-3' }
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       path: 'menu2',
-  //       component: () => import('@/views/nested/menu2/index'),
-  //       meta: { title: 'menu2' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: 'external-link',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-  //       meta: { title: 'External Link', icon: 'link' }
-  //     }
-  //   ]
-  // },
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

@@ -10,7 +10,10 @@
       >
     </div>
     <el-row :gutter="20">
-      <el-col :span="12" @click.native="toCert('/health-cert')">
+      <el-col
+        :span="12"
+        @click.native="toCert('health-cert', certInfo.healthCert)"
+      >
         <el-card
           body-style="padding: 15px;"
           :class="
@@ -18,11 +21,14 @@
               ? 'dashboard-card'
               : 'dashboard-card dashboard-card-disable'
           "
-          shadow="certInfo.healthCert ? 'always' : 'never'"
-          >健康证</el-card
-        ></el-col
+          :shadow="certInfo.healthCert ? 'always' : 'never'"
+          >健康证
+          <svg-icon icon-class="health-cert" /> </el-card
+      ></el-col>
+      <el-col
+        :span="12"
+        @click.native="toCert('food-cert', certInfo.foodBusinessCert)"
       >
-      <el-col :span="12" @click.native="toCert('/health-cert')">
         <el-card
           body-style="padding: 15px;"
           :class="
@@ -30,13 +36,15 @@
               ? 'dashboard-card'
               : 'dashboard-card dashboard-card-disable'
           "
-          shadow="certInfo.foodBusinessCert ? 'always' : 'never'"
-          >食品经营许可证</el-card
-        ></el-col
-      >
+          :shadow="certInfo.foodBusinessCert ? 'always' : 'never'"
+          >食品经营许可证 <svg-icon icon-class="health-cert" /></el-card
+      ></el-col>
     </el-row>
     <el-row :gutter="20" style="margin-top: 20px">
-      <el-col :span="12" @click.native="toCert('/health-cert')">
+      <el-col
+        :span="12"
+        @click.native="toCert('public-cert', certInfo.publicHygieneCert)"
+      >
         <el-card
           body-style="padding: 15px;"
           :class="
@@ -44,11 +52,14 @@
               ? 'dashboard-card'
               : 'dashboard-card dashboard-card-disable'
           "
-          shadow="certInfo.publicHygieneCert ? 'always' : 'never'"
-          >公共场所卫生许可证</el-card
-        ></el-col
+          :shadow="certInfo.publicHygieneCert ? 'always' : 'never'"
+          >公共场所卫生许可证
+          <svg-icon icon-class="health-cert" /> </el-card
+      ></el-col>
+      <el-col
+        :span="12"
+        @click.native="toCert('water-cert', certInfo.waterHygieneCert)"
       >
-      <el-col :span="12" @click.native="toCert('/health-cert')">
         <el-card
           body-style="padding: 15px;"
           :class="
@@ -56,10 +67,9 @@
               ? 'dashboard-card'
               : 'dashboard-card dashboard-card-disable'
           "
-          shadow="certInfo.waterHygieneCert ? 'always' : 'never'"
-          >供水单位卫生许可证</el-card
-        ></el-col
-      >
+          :shadow="certInfo.waterHygieneCert ? 'always' : 'never'"
+          >供水单位卫生许可证 <svg-icon icon-class="health-cert" /></el-card
+      ></el-col>
     </el-row>
   </div>
 </template>
@@ -96,9 +106,20 @@ export default {
       });
     },
 
-    toCert(route) {
-      console.log('route')
-      this.$router.push({ path: route });
+    toCert(route, id) {
+      let name = route + "-";
+      if (id) {
+name = name + "detail"
+      }else {
+        name = name + "index"
+      }
+      console.log(name, id);
+      this.$router.push({
+        name: name,
+        params: {
+          id: id,
+        },
+      });
     },
   },
 };
@@ -126,9 +147,16 @@ export default {
     font-weight: 500;
     min-height: 150px;
     color: #222;
+    .svg-icon {
+      width: 6em;
+      height: 6em;
+      vertical-align: 0;
+      fill: currentColor;
+      overflow: hidden;
+    }
   }
   &-card-disable {
-    background: linear-gradient(to bottom,  rgb(220, 220, 220), #ccc);
+    background: linear-gradient(to bottom, rgb(220, 220, 220), #ccc);
     // background-color: ;
     // linear-gradient(to bottom,  rgb(220, 220, 220), #ccc);
     color: #666;

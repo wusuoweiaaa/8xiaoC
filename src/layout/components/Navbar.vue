@@ -7,7 +7,7 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          admin
+        {{userInfo.name}}
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -43,6 +43,7 @@ export default {
     Hamburger
   },
   computed: {
+    userInfo: window.localStorage.getItem("USER_INFO"),
     ...mapGetters([
       'sidebar',
       'avatar'

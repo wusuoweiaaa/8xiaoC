@@ -2,7 +2,7 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2019-11-02 20:14:08
- * @LastEditTime : 2021-04-24 22:14:11
+ * @LastEditTime : 2021-04-25 22:11:57
  * @FilePath     : /8xiaoC/src/utils/request.js
  * @Description  : Do not edit
  */
@@ -12,6 +12,7 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 import * as error from '@/utils/error'
 import Qs from 'qs'
+import router from '../router'
 
 // create an axios instance
 
@@ -95,9 +96,12 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err' + error) // for debug
+    console.log('err' + error,) // for debug
+    if ( error.response.status == 401 ||error.response.status == 403 ) {
+      router.replace("/login")
+    }
     Message({
-      message: error.msg,
+      message: error.response.data.msg,
       type: 'error',
       duration: 5 * 1000
     })
