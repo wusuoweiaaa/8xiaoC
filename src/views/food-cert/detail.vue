@@ -2,7 +2,7 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-25 21:01:29
- * @LastEditTime : 2021-04-25 23:55:59
+ * @LastEditTime : 2021-04-26 15:13:52
  * @FilePath     : /8xiaoC/src/views/food-cert/detail.vue
  * @Description  : Do not edit
 -->
@@ -30,15 +30,32 @@
           <el-col :span="8">姓名:</el-col>
           <el-col :span="16">name</el-col>
       </el-row>
+      <el-button type="primary">修改已填报食品经营许可证</el-button>
   </div>
 </template>
 
-<script>
-export default {
 
-}
+<script>
+import { getFoodBusinessCertDetail } from "@/api/cert";
+export default {
+  data() {
+    return {
+      detail: {},
+    };
+  },
+  mounted() {
+    this.initDetail();
+  },
+  methods: {
+    initDetail() {
+        console.log(this.$route)
+      getFoodBusinessCertDetail(this.$route.params.id).then((res) => {
+        this.detail = res.data
+      });
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

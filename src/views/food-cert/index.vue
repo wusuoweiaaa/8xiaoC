@@ -2,13 +2,13 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-24 21:03:41
- * @LastEditTime : 2021-04-25 23:01:23
+ * @LastEditTime : 2021-04-26 14:56:33
  * @FilePath     : /8xiaoC/src/views/food-cert/index.vue
  * @Description  : Do not edit
 -->
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="formData"  :label-position="top">
+    <el-form ref="form" :model="formData"  label-position="top">
       <el-form-item label="住所" prop="address">
         <el-input v-model="formData.address" placeholder="输入住所" />
       </el-form-item>
@@ -85,7 +85,7 @@
         :loading="loading"
         @click="onSubmit"
       >
-        添加健康证
+        添加食品经营许可证
       </el-button>
     </el-row>
   </div>
@@ -93,9 +93,9 @@
 
 <script>
 import {
-  postHealthCert,
-  putHealthCertId,
-  getHealthCertDetail,
+  postFoodBusinessCert,
+  putFoodBusinessCertId,
+  getFoodBusinessCertDetail,
 } from "@/api/cert";
 
 export default {
@@ -135,8 +135,8 @@ export default {
     };
   },
   mounted() {
-    if (this.$router.params.id) {
-      getHealthCertDetail().then((res) => {
+    if (this.$router.params && this.$router.params.id) {
+      getFoodBusinessCertDetail().then((res) => {
         console.log(res);
       });
     }
@@ -148,12 +148,12 @@ export default {
         if (valid) {
           this.loading = true;
 
-          submitHandle(this.formData)
+          this.submitHandle(this.formData)
             .then((res) => {
               this.$message({
                 message: this.$router.params.id
-                  ? "修改健康证成功"
-                  : "添加健康证成功",
+                  ? "修改食品经营许可证成功"
+                  : "添加食品经营许可证成功",
                 type: "success",
               });
               this.$router.push({ path: "/dashboard/index" });
@@ -168,8 +168,8 @@ export default {
     },
     submitHandle(data) {
       return this.$router.params.id
-        ? putHealthCertId(this.$router.params.id, data)
-        : postHealthCert(data);
+        ? putFoodBusinessCertId(this.$router.params.id, data)
+        : postFoodBusinessCert(data);
     },
     onCancel() {
       this.$message({

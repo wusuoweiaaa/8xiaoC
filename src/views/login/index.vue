@@ -158,10 +158,9 @@ export default {
           this.loading = true;
           let name = this.loginForm.name;
           this.loginForm.password = strMd5(name, 32);
-          console.log(this.loginForm);
           login(this.loginForm)
             .then((res) => {
-              window.localStorage.setItem('USER_INFO', res.data)
+              window.localStorage.setItem('USER_INFO',  JSON.stringify(res.data))
               this.$router.push({ path: '/dashboard/index'});
               this.loading = false;
             })
