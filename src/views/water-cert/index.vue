@@ -2,15 +2,18 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-24 21:03:41
- * @LastEditTime : 2021-04-26 14:56:54
+ * @LastEditTime : 2021-04-27 20:53:39
  * @FilePath     : /8xiaoC/src/views/water-cert/index.vue
  * @Description  : Do not edit
 -->
 <template>
   <div class="app-container">
+    <el-row>
+      <el-button icon="el-icon-arrow-left" @click.native="onCancel">返回</el-button>
+    </el-row>
     <el-form ref="form" :model="formData"  label-position="top">
       <el-form-item label="地址" prop="address">
-        <el-input v-model="formData.address" placeholder="输入地址" />
+        <el-input type="textarea" v-model="formData.address" placeholder="输入地址" />
       </el-form-item>
       <el-form-item label="有效期限(截止日期)" prop="endDate">
         <el-date-picker
@@ -32,8 +35,8 @@
       <el-form-item label="法定代表人(负责人）" prop="legalPerson">
         <el-input v-model="formData.legalPerson" placeholder="输入法定代表人(负责人）" />
       </el-form-item>
-      <el-form-item label="许可证项目" prop="licenseProject">
-        <el-input v-model="formData.licenseProject" placeholder="输入许可证项目" />
+      <el-form-item label="许可范围" prop="licenseScope">
+        <el-input  type="textarea" v-model="formData.licenseScope" placeholder="输入许可范围" />
       </el-form-item>
       <el-form-item label="公证字号" prop="notarizationNo">
         <el-input v-model="formData.notarizationNo" placeholder="输入公证字号" />
@@ -56,7 +59,8 @@
         :loading="loading"
         @click="onSubmit"
       >
-        添加供水单位卫生许可证
+       {{this.$route.params.id ? '修改供水单位卫生许可证' :'添加供水单位卫生许可证'}} 
+        
       </el-button>
     </el-row>
   </div>
@@ -79,7 +83,7 @@ export default {
         issueAuthority: "", // 发证机关
         issueDate: "", // 发证日期
         legalPerson: "",// 法定代表人(负责人)
-        licenseProject: "",// 许可证编号
+        licenseScope: "",// 许可证编号
         notarizationNo: "",// 主体业态
         unitName: "", // 经营者名称
         startDate: "", 
@@ -100,9 +104,17 @@ export default {
     };
   },
   mounted() {
-    if (this.$router.params && this.$router.params.id) {
-      getWaterHygieneCertDetail().then((res) => {
-        console.log(res);
+    if (this.$route.params && this.$route.params.id) {
+      getWaterHygieneCertDetail(this.$route.params.id).then((res) => {
+         this.formData.address = res.data.address
+        this.formData.endDate = res.data.endDate
+        this.formData.issueAuthority = res.data.issueAuthority
+        this.formData.issueDate = res.data.issueDate
+        this.formData.legalPerson = res.data.legalPerson
+        this.formData.licenseScope = res.data.licenseScope
+        this.formData.notarizationNo = res.data.notarizationNo
+        this.formData.unitName = res.data.unitName
+        this.formData.startDate = res.data.startDate
       });
     }
   },
@@ -116,7 +128,7 @@ export default {
           this.submitHandle(this.formData)
             .then((res) => {
               this.$message({
-                message: this.$router.params.id
+                message: this.$route.params.id
                   ? "修改供水单位卫生许可证成功"
                   : "添加供水单位卫生许可证成功",
                 type: "success",
@@ -132,15 +144,23 @@ export default {
       });
     },
     submitHandle(data) {
-      return this.$router.params.id
-        ? putWaterHygieneCertId(this.$router.params.id, data)
+      return this.$route.params.id
+        ? putWaterHygieneCertId(this.$route.params.id, data)
         : postWaterHygieneCert(data);
     },
-    onCancel() {
-      this.$message({
-        message: "cancel!",
-        type: "warning",
-      });
+     onCancel() {
+      if (this.$route.params.id) {
+          this.$router.replace({
+        name: 'water-cert-detail',
+        params: {
+          id: this.$route.params.id
+        },
+      })
+      }else{
+        this.$router.push({ path: "/dashboard/index" });
+      }
+       
+     
     },
   },
 };

@@ -3,7 +3,7 @@
     <!-- <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
 
     <!-- <breadcrumb class="breadcrumb-container" /> -->
-    <span class="main-title">"八小"行业证件信息收集系统</span>
+    <span class="main-title">秀英区“证件通”行业卫生健康监管平台</span>
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -72,14 +72,16 @@ export default {
   line-height: 50px;
   overflow: hidden;
   position: relative;
+   text-align: center;
   background: #fff;
   //  background: #2d3a4b;
   box-shadow: 0 1px 6px rgba(0, 21, 41, 0.12);
   .main-title {
     padding-left: 15px;
-    color: #606266;
+    color: #2d3a4b;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
+    // color:#fff;
   }
 
   .hamburger-container {
@@ -114,7 +116,9 @@ export default {
       padding: 0 8px;
       height: 100%;
       font-size: 18px;
-      color: #5a5e66;
+      // color: #5a5e66;
+      color: #2d3a4b;
+      
       vertical-align: text-bottom;
 
       &.hover-effect {
@@ -131,8 +135,9 @@ export default {
       margin-right: 30px;
 
       .avatar-wrapper {
-        margin-top: 5px;
+        // margin-top: 5px;
         position: relative;
+        // color:#fff;
 
         .user-avatar {
           cursor: pointer;
@@ -145,7 +150,7 @@ export default {
           cursor: pointer;
           position: absolute;
           right: -20px;
-          top: 25px;
+          top: 20px;
           font-size: 12px;
         }
       }

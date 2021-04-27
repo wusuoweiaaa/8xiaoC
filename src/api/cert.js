@@ -2,7 +2,7 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-25 20:47:09
- * @LastEditTime : 2021-04-26 00:01:38
+ * @LastEditTime : 2021-04-27 21:10:34
  * @FilePath     : /8xiaoC/src/api/cert.js
  * @Description  : Do not edit
  */
@@ -53,11 +53,10 @@ export function postHealthCert(data) {
       data: data
     })
   }
-  export function getPublicCertDetail(id,data) {
+  export function getPublicCertDetail(id) {
     return request({
       url: `/public-hygiene-cert/${id}`,
       method: 'get',
-      data: data
     })
   }
   export function putPublicCertId(id,data) {
@@ -83,11 +82,10 @@ export function postHealthCert(data) {
       data: data
     })
   }
-  export function getFoodBusinessCertDetail(id,data) {
+  export function getFoodBusinessCertDetail(id) {
     return request({
       url: `/food-business-cert/${id}`,
       method: 'get',
-      data: data
     })
   }
   export function putFoodBusinessCertId(id,data) {
@@ -114,16 +112,88 @@ export function getWaterHygieneCert() {
       data: data
     })
   }
-  export function getWaterHygieneCertDetail(id,data) {
+  export function getWaterHygieneCertDetail(id) {
     return request({
       url: `/water-hygiene-cert/${id}`,
       method: 'get',
-      data: data
     })
   }
   export function putWaterHygieneCertId(id,data) {
     return request({
       url: `/water-hygiene-cert/${id}`,
+      method: 'put',
+      data: data
+    })
+  }
+
+  export function patchMobile(id,data) {
+    return request({
+      url: `/users/${id}`,
+      method: 'patch',
+      data: data
+    })
+  }
+
+
+  export function postWaterQualityReport(data) {
+    return request({
+      url: `/waterQualityReport`,
+      method: 'post',
+      data: data
+    })
+  }
+  export function getWaterQualityReportDetail(id) {
+    return request({
+      url: `/waterQualityReport/${id}`,
+      method: 'get',
+    })
+  }
+  export function putWaterQualityReportId(id,data) {
+    return request({
+      url: `/waterQualityReport/${id}`,
+      method: 'put',
+      data: data
+    })
+  }
+
+
+  export function postAirQualityReport(data) {
+    return request({
+      url: `/airQualityReport`,
+      method: 'post',
+      data: data
+    })
+  }
+  export function getAirQualityReportDetail(id) {
+    return request({
+      url: `/airQualityReport/${id}`,
+      method: 'get',
+    })
+  }
+  export function putAirQualityReportId(id,data) {
+    return request({
+      url: `/airQualityReport/${id}`,
+      method: 'put',
+      data: data
+    })
+  }
+
+  export function postPublicHygienicReport(data) {
+    return request({
+      url: `/publicHygienicReport`,
+      method: 'post',
+      data: data
+    })
+  }
+  export function getPublicHygienicReportDetail(id) {
+    return request({
+      url: `/publicHygienicReport/${id}`,
+      method: 'get',
+    })
+  }
+  export function putPublicHygienicReportId(id,data) {
+    return request({
+      url: `/publicHygienicReport/${id}`,
       method: 'put',
       data: data
     })

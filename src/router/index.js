@@ -34,7 +34,7 @@ export const constantRoutes = [
   {
     path: '/dashboard',
     component: Layout,
-    name: '/dashboard',
+    name: 'dashboard',
     meta: { title: '首页', icon: 'dashboard' },
     children: [{
       path: 'index',
@@ -125,18 +125,74 @@ export const constantRoutes = [
     ]
   },
 
-  
-
-  
   {
-    path: '/form',
+    path: '/water-quality',
+    component: Layout,
+    name: '/water-quality',
+    meta: { title: '供水水质检测报告', icon: 'example' },
+    children: [{
+      path: 'index',
+      component: () => import('@/views/water-quality/index'),
+      name: 'water-quality-index',
+      meta: { title: '供水水质检测报告添加', icon: 'example' },
+    },
+    {
+      path: 'detail',
+      component: () => import('@/views/water-quality/detail'),
+      name: 'water-quality-detail',
+      meta: { title: '供水水质检测报告详情', icon: 'example' },
+    },
+    ]
+  },
+
+  {
+    path: '/air-quality',
+    component: Layout,
+    name: '/air-quality',
+    meta: { title: '空气卫生质量检测报告', icon: 'example' },
+    children: [{
+      path: 'index',
+      component: () => import('@/views/air-quality/index'),
+      name: 'air-quality-index',
+      meta: { title: '空气卫生质量检测报告添加', icon: 'example' },
+    },
+    {
+      path: 'detail',
+      component: () => import('@/views/air-quality/detail'),
+      name: 'air-quality-detail',
+      meta: { title: '空气卫生质量检测报告详情', icon: 'example' },
+    },
+    ]
+  },
+
+  {
+    path: '/public-hygienic',
+    component: Layout,
+    name: '/public-hygienic',
+    meta: { title: '公共用品卫生检测报告', icon: 'example' },
+    children: [{
+      path: 'index',
+      component: () => import('@/views/public-hygienic/index'),
+      name: 'public-hygienic-index',
+      meta: { title: '公共用品卫生检测报告添加', icon: 'example' },
+    },
+    {
+      path: 'detail',
+      component: () => import('@/views/public-hygienic/detail'),
+      name: 'public-hygienic-detail',
+      meta: { title: '公共用品卫生检测报告详情', icon: 'example' },
+    },
+    ]
+  },
+  {
+    path: '/mobile',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '健康证填报', icon: 'form' }
+        name: 'mobile',
+        component: () => import('@/views/mobile/index'),
+        meta: { title: '修改手机号', icon: 'form' }
       }
     ]
   },

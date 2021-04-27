@@ -9,12 +9,12 @@
       label-position="left"
     >
       <div class="title-container">
-        <h5 class="title">"八小"行业证件信息收集系统</h5>
+        <h5 class="title">秀英区“证件通”行业卫生健康监管平台</h5>
       </div>
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <svg-icon icon-class="user" />
+          <svg-icon icon-class="card" />
         </span>
         <el-input
           ref="username"
@@ -28,7 +28,7 @@
 
       <el-form-item prop="name">
         <span class="svg-container">
-          <svg-icon icon-class="password" />
+          <svg-icon icon-class="name" />
         </span>
         <el-input
           :key="passwordType"
@@ -48,7 +48,7 @@
       </el-form-item>
       <el-form-item prop="mobile">
        <span class="svg-container">
-          <svg-icon icon-class="password" />
+          <svg-icon icon-class="phone" />
         </span>
         <el-input
           :key="passwordType"

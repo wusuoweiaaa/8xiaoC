@@ -2,12 +2,15 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-24 21:03:41
- * @LastEditTime : 2021-04-25 23:29:24
+ * @LastEditTime : 2021-04-27 19:39:13
  * @FilePath     : /8xiaoC/src/views/health-cert/index.vue
  * @Description  : Do not edit
 -->
 <template>
   <div class="app-container">
+    <el-row>
+      <el-button icon="el-icon-arrow-left" @click.native="onCancel">返回</el-button>
+    </el-row>
     <el-form ref="form" :model="formData" label-position="top">
       <el-form-item label="编码" prop="code">
         <el-input v-model="formData.code" placeholder="输入编码" />
@@ -27,7 +30,7 @@
     </el-form>
    <el-row style="text-align:center;">
      <el-button style="width: 100%; margin-bottom: 30px" type="primary" :loading="loading" @click.native="onSubmit">
-      {{this.$router.params && this.$router.params.id ? "修改健康证": "添加健康证"}}
+      {{this.$route.params && this.$route.params.id ? "修改健康证": "添加健康证"}}
     </el-button>
    </el-row>
   </div>
@@ -58,9 +61,13 @@ export default {
   },
   mounted() {
     console.log(this.$router.params)
-    if (this.$router.params && this.$router.params.id){
-      getHealthCertDetail().then(res => {
-        console.log(res)
+    if (this.$route.params && this.$route.params.id){
+      getHealthCertDetail(this.$route.params.id).then(res => {
+         this.formData.code = res.data.code;
+         this.formData.employmentType = res.data.employmentType;
+         this.formData.issueAuthority = res.data.issueAuthority;
+         this.formData.issueDate = res.data.issueDate;
+         this.formData.name = res.data.name;
       })
     }
   },
@@ -72,11 +79,11 @@ export default {
       this.$refs.form.validate((valid) => {
         // if (valid) {
           this.loading = true;
-          
+         
           this.submitHandle(this.formData)
             .then((res) => {
               this.$message({
-              message: this.$router.params.id ? "修改健康证成功": "添加健康证成功",
+              message: this.$route.params.id ? "修改健康证成功": "添加健康证成功",
               type: "success",
               });
               this.$router.push({ path: '/dashboard/index'});
@@ -91,13 +98,21 @@ export default {
       );
     },
     submitHandle (data) {
-      return  this.$router.params && this.$router.params.id ? putHealthCertId(this.$router.params.id , data) : postHealthCert(data);
+      return  this.$route.params && this.$route.params.id ? putHealthCertId(this.$route.params.id , data) : postHealthCert(data);
     },
-    onCancel() {
-      this.$message({
-        message: "cancel!",
-        type: "warning",
-      });
+     onCancel() {
+      if (this.$route.params.id) {
+          this.$router.replace({
+        name: 'health-cert-detail',
+        params: {
+          id: this.$route.params.id
+        },
+      })
+      }else{
+        this.$router.push({ path: "/dashboard/index" });
+      }
+       
+     
     },
   },
 };

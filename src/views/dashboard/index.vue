@@ -1,13 +1,41 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">
-      <el-row
-        ><span class="text-label">身份证:</span> {{ userInfo.username }}</el-row
-      >
-      <el-row><span class="text-label">姓名: </span>{{ userInfo.name }}</el-row>
-      <el-row
-        ><span class="text-label">手机号:</span> {{ userInfo.mobile }}</el-row
-      >
+      <el-row class="text-line">
+        <el-col :span="12" class="text-label">
+          <span>身份证</span>
+        </el-col>
+        <el-col :span="12">
+          :<span style="margin-left: 15px">{{ userInfo.username }}</span>
+        </el-col>
+      </el-row>
+      <el-row class="text-line">
+        <el-col :span="12" class="text-label">
+          <span>姓名</span>
+        </el-col>
+        <el-col :span="12">
+          :<span style="margin-left: 15px">{{ userInfo.name }}</span>
+        </el-col>
+      </el-row>
+      <el-row class="text-line">
+        <el-col :span="12">
+          <el-col :span="12" class="text-label">
+            <span>手机号</span>
+          </el-col>
+          <el-col :span="12">
+            :<span style="margin-left: 15px">{{ userInfo.mobile }}</span>
+          </el-col>
+        </el-col>
+        <el-col :span="12" style="text-align: right"
+          ><el-button
+            type="primary"
+            size="mini"
+            style="margin-left=20px;"
+            @click.native="toMobile"
+            >修改手机号</el-button
+          ></el-col
+        >
+      </el-row>
     </div>
     <el-row :gutter="20">
       <el-col
@@ -22,8 +50,7 @@
               : 'dashboard-card dashboard-card-disable'
           "
           :shadow="certInfo.healthCert ? 'always' : 'never'"
-          >健康证
-          <svg-icon icon-class="health-cert" /> </el-card
+          ><div>健康证</div> <svg-icon icon-class="health-cert" /> </el-card
       ></el-col>
       <el-col
         :span="12"
@@ -37,7 +64,7 @@
               : 'dashboard-card dashboard-card-disable'
           "
           :shadow="certInfo.foodBusinessCert ? 'always' : 'never'"
-          >食品经营许可证 <svg-icon icon-class="health-cert" /></el-card
+          ><div>食品经营许可证</div> <svg-icon icon-class="food-cert" /></el-card
       ></el-col>
     </el-row>
     <el-row :gutter="20" style="margin-top: 20px">
@@ -53,8 +80,7 @@
               : 'dashboard-card dashboard-card-disable'
           "
           :shadow="certInfo.publicHygieneCert ? 'always' : 'never'"
-          >公共场所卫生许可证
-          <svg-icon icon-class="health-cert" /> </el-card
+          ><div>公共场所卫生许可证</div> <svg-icon icon-class="public-cert" /> </el-card
       ></el-col>
       <el-col
         :span="12"
@@ -68,8 +94,57 @@
               : 'dashboard-card dashboard-card-disable'
           "
           :shadow="certInfo.waterHygieneCert ? 'always' : 'never'"
-          >供水单位卫生许可证 <svg-icon icon-class="health-cert" /></el-card
+          ><div>供水单位卫生许可证</div> <svg-icon icon-class="water-cert" /></el-card
       ></el-col>
+    </el-row>
+
+    <el-row :gutter="20" style="margin-top: 20px">
+      <el-col
+        :span="12"
+        @click.native="toCert('water-quality', certInfo.waterHygieneCert)"
+      >
+        <el-card
+          body-style="padding: 15px;"
+          :class="
+            certInfo.waterHygieneCert
+              ? 'dashboard-card'
+              : 'dashboard-card dashboard-card-disable'
+          "
+          :shadow="certInfo.waterHygieneCert ? 'always' : 'never'"
+          ><div>供水水质检测报告</div> <svg-icon icon-class="report" /></el-card
+      ></el-col>
+      <el-col
+        :span="12"
+        
+        @click.native="toCert('public-hygienic', certInfo.waterHygieneCert)"
+      >
+        <el-card
+          body-style="padding: 15px;"
+          :class="
+            certInfo.waterHygieneCert
+              ? 'dashboard-card'
+              : 'dashboard-card dashboard-card-disable'
+          "
+          :shadow="certInfo.waterHygieneCert ? 'always' : 'never'"
+          ><div>公共用品卫生检测报告</div> <svg-icon icon-class="report" /></el-card
+      ></el-col>
+    </el-row>
+    <el-row :gutter="20"  style="margin-top: 20px">
+      <el-col
+        :span="12"
+        @click.native="toCert('air-quality', certInfo.publicHygieneCert)"
+      >
+        <el-card
+          body-style="padding: 15px;"
+          :class="
+            certInfo.publicHygieneCert
+              ? 'dashboard-card'
+              : 'dashboard-card dashboard-card-disable'
+          "
+          :shadow="certInfo.publicHygieneCert ? 'always' : 'never'"
+          ><div>空气卫生质量检测报告</div> <svg-icon icon-class="report" /> </el-card
+      ></el-col>
+      <el-col :span="12"> </el-col>
     </el-row>
   </div>
 </template>
@@ -106,12 +181,18 @@ export default {
       });
     },
 
+    toMobile() {
+      this.$router.push({
+        name: "mobile",
+      });
+    },
+
     toCert(route, id) {
       let name = route + "-";
       if (id) {
-name = name + "detail"
-      }else {
-        name = name + "index"
+        name = name + "detail";
+      } else {
+        name = name + "index";
       }
       console.log(name, id);
       this.$router.push({
@@ -131,23 +212,31 @@ name = name + "detail"
     margin: 20px;
   }
   &-text {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 40px;
     margin-bottom: 20px;
-    color: #222;
+    color: #2d3a4b;
     font-weight: 500;
-    .text-label {
-      font-weight: normal;
-      width: 80px;
-      display: inline-block;
+    .text-line {
+      height: 30px;
+      line-height: 30px;
+      .text-label {
+        text-align: justify;
+        text-align-last: justify;
+        font-weight: normal;
+        width: 60px;
+        display: inline-block;
+      }
     }
   }
   &-card {
     font-size: 16px;
     font-weight: 500;
     min-height: 150px;
-    color: #222;
+    color: #2d3a4b;
+    text-align: center;
     .svg-icon {
+      margin-top: 10px;
       width: 6em;
       height: 6em;
       vertical-align: 0;
@@ -159,6 +248,9 @@ name = name + "detail"
     background: linear-gradient(to bottom, rgb(220, 220, 220), #ccc);
     // background-color: ;
     // linear-gradient(to bottom,  rgb(220, 220, 220), #ccc);
+    //     background: linear-gradient(to bottom, #8790b5, #346090);
+    // color: #fff;
+    // }
     color: #666;
   }
 }
