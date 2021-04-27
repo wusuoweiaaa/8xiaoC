@@ -101,47 +101,47 @@
     <el-row :gutter="20" style="margin-top: 20px">
       <el-col
         :span="12"
-        @click.native="toCert('water-quality', certInfo.waterHygieneCert)"
+        @click.native="toCert('water-quality', certInfo.waterQualityReport)"
       >
         <el-card
           body-style="padding: 15px;"
           :class="
-            certInfo.waterHygieneCert
+            certInfo.waterQualityReport
               ? 'dashboard-card'
               : 'dashboard-card dashboard-card-disable'
           "
-          :shadow="certInfo.waterHygieneCert ? 'always' : 'never'"
+          :shadow="certInfo.waterQualityReport ? 'always' : 'never'"
           ><div>供水水质检测报告</div> <svg-icon icon-class="report" /></el-card
       ></el-col>
       <el-col
         :span="12"
         
-        @click.native="toCert('public-hygienic', certInfo.waterHygieneCert)"
+        @click.native="toCert('public-hygienic', certInfo.publicHygienicReport)"
       >
         <el-card
           body-style="padding: 15px;"
           :class="
-            certInfo.waterHygieneCert
+            certInfo.publicHygienicReport
               ? 'dashboard-card'
               : 'dashboard-card dashboard-card-disable'
           "
-          :shadow="certInfo.waterHygieneCert ? 'always' : 'never'"
+          :shadow="certInfo.publicHygienicReport ? 'always' : 'never'"
           ><div>公共用品卫生检测报告</div> <svg-icon icon-class="report" /></el-card
       ></el-col>
     </el-row>
     <el-row :gutter="20"  style="margin-top: 20px">
       <el-col
         :span="12"
-        @click.native="toCert('air-quality', certInfo.publicHygieneCert)"
+        @click.native="toCert('air-quality', certInfo.airQualityReport)"
       >
         <el-card
           body-style="padding: 15px;"
           :class="
-            certInfo.publicHygieneCert
+            certInfo.airQualityReport
               ? 'dashboard-card'
               : 'dashboard-card dashboard-card-disable'
           "
-          :shadow="certInfo.publicHygieneCert ? 'always' : 'never'"
+          :shadow="certInfo.airQualityReport ? 'always' : 'never'"
           ><div>空气卫生质量检测报告</div> <svg-icon icon-class="report" /> </el-card
       ></el-col>
       <el-col :span="12"> </el-col>

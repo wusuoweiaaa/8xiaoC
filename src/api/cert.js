@@ -2,7 +2,7 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-25 20:47:09
- * @LastEditTime : 2021-04-27 21:10:34
+ * @LastEditTime : 2021-04-27 22:03:14
  * @FilePath     : /8xiaoC/src/api/cert.js
  * @Description  : Do not edit
  */
@@ -137,20 +137,20 @@ export function getWaterHygieneCert() {
 
   export function postWaterQualityReport(data) {
     return request({
-      url: `/waterQualityReport`,
+      url: `/water-quality-report`,
       method: 'post',
       data: data
     })
   }
   export function getWaterQualityReportDetail(id) {
     return request({
-      url: `/waterQualityReport/${id}`,
+      url: `/water-quality-report/${id}`,
       method: 'get',
     })
   }
   export function putWaterQualityReportId(id,data) {
     return request({
-      url: `/waterQualityReport/${id}`,
+      url: `/water-quality-report/${id}`,
       method: 'put',
       data: data
     })
@@ -159,20 +159,20 @@ export function getWaterHygieneCert() {
 
   export function postAirQualityReport(data) {
     return request({
-      url: `/airQualityReport`,
+      url: `/air-quality-report`,
       method: 'post',
       data: data
     })
   }
   export function getAirQualityReportDetail(id) {
     return request({
-      url: `/airQualityReport/${id}`,
+      url: `/air-quality-report/${id}`,
       method: 'get',
     })
   }
   export function putAirQualityReportId(id,data) {
     return request({
-      url: `/airQualityReport/${id}`,
+      url: `/air-quality-report/${id}`,
       method: 'put',
       data: data
     })
@@ -180,20 +180,20 @@ export function getWaterHygieneCert() {
 
   export function postPublicHygienicReport(data) {
     return request({
-      url: `/publicHygienicReport`,
+      url: `/public-hygienic-report`,
       method: 'post',
       data: data
     })
   }
   export function getPublicHygienicReportDetail(id) {
     return request({
-      url: `/publicHygienicReport/${id}`,
+      url: `/public-hygienic-report/${id}`,
       method: 'get',
     })
   }
   export function putPublicHygienicReportId(id,data) {
     return request({
-      url: `/publicHygienicReport/${id}`,
+      url: `/public-hygienic-report/${id}`,
       method: 'put',
       data: data
     })
