@@ -2,7 +2,7 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-25 21:01:29
- * @LastEditTime : 2021-04-27 20:59:10
+ * @LastEditTime : 2021-04-27 22:20:11
  * @FilePath     : /8xiaoC/src/views/food-cert/detail.vue
  * @Description  : Do not edit
 -->
@@ -86,6 +86,10 @@
         <el-col :span="8" class="item-name">经营者名称:</el-col>
         <el-col :span="16" class="item-value">{{ detail.operator }}</el-col>
       </el-row>
+      <el-row class="detail-item">
+      <el-col :span="8" class="item-name">单位名称:</el-col>
+      <el-col :span="16" class="item-value">{{detail.unitName}}</el-col>
+    </el-row>
     </div>
 
     <el-button

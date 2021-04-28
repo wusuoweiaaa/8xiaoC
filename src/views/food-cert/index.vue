@@ -2,7 +2,7 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-24 21:03:41
- * @LastEditTime : 2021-04-27 19:37:44
+ * @LastEditTime : 2021-04-27 22:20:29
  * @FilePath     : /8xiaoC/src/views/food-cert/index.vue
  * @Description  : Do not edit
 -->
@@ -81,6 +81,9 @@
       <el-form-item label="经营者名称" prop="operator">
         <el-input v-model="formData.operator" placeholder="输入经营者名称" />
       </el-form-item>
+      <el-form-item label="单位名称"  prop="unitName">
+         <el-input v-model="formData.unitName"  placeholder="输入单位名称"/>
+      </el-form-item>
     </el-form>
     <el-row style="text-align: center">
       <el-button
@@ -122,6 +125,7 @@ export default {
         licenseNumber: "",// 许可证编号
         mainBusiness: "",// 主体业态
         operator: "", // 经营者名称
+        unitName: ""
       },
     };
   },
@@ -143,6 +147,7 @@ export default {
         this.formData.licenseNumber = res.data.licenseNumber
         this.formData.mainBusiness = res.data.mainBusiness
         this.formData.operator = res.data.operator
+        this.formData.unitName = res.data.unitName
       });
     }
   },

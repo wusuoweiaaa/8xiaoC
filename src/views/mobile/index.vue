@@ -2,12 +2,15 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-26 19:29:55
- * @LastEditTime : 2021-04-26 19:40:20
+ * @LastEditTime : 2021-04-27 22:13:18
  * @FilePath     : /8xiaoC/src/views/mobile/index.vue
  * @Description  : Do not edit
 -->
 <template>
   <div class="app-container">
+    <el-row>
+      <el-button icon="el-icon-arrow-left"  @click.native="onCancel">返回</el-button>
+    </el-row>
     <el-form ref="form" :model="formData" :rules="rules" label-position="top">
       <el-form-item label="新手机号" prop="mobile">
         <el-input v-model="formData.mobile" placeholder="输入新手机号" />
@@ -74,10 +77,9 @@ export default {
         }
       });
     },
-    onCancel() {
-      this.$message({
-        message: "cancel!",
-        type: "warning",
+     onCancel() {
+      this.$router.replace({
+        path: '/dashboard/index'
       });
     },
   },

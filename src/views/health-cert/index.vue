@@ -2,7 +2,7 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-24 21:03:41
- * @LastEditTime : 2021-04-27 19:39:13
+ * @LastEditTime : 2021-04-27 22:18:28
  * @FilePath     : /8xiaoC/src/views/health-cert/index.vue
  * @Description  : Do not edit
 -->
@@ -27,6 +27,9 @@
       <el-form-item label="姓名"  prop="name">
          <el-input v-model="formData.name"  placeholder="输入姓名"/>
       </el-form-item>
+      <el-form-item label="单位名称"  prop="unitName">
+         <el-input v-model="formData.unitName"  placeholder="输入单位名称"/>
+      </el-form-item>
     </el-form>
    <el-row style="text-align:center;">
      <el-button style="width: 100%; margin-bottom: 30px" type="primary" :loading="loading" @click.native="onSubmit">
@@ -49,18 +52,11 @@ export default {
         issueAuthority: "", // 发证单位
         issueDate: "", // 发证日期
         name: "", // 姓名
+        unitName:""
       },
-      // rules: {
-      //   code: [{ required: true, trigger: "blur", message: "请输入编码" }],
-      //   employmentType: [{ required: true, trigger: "blur", message: "请输入从业类别" }],
-      //   issueAuthority: [{ required: true, trigger: "blur", message: "请输入发证单位" }],
-      //   issueDate: [{ required: true, trigger: "blur", message: "请选择发证日期" }],
-      //   name: [{ required: true, trigger: "blur", message: "请输入姓名" }],
-      // },
     };
   },
   mounted() {
-    console.log(this.$router.params)
     if (this.$route.params && this.$route.params.id){
       getHealthCertDetail(this.$route.params.id).then(res => {
          this.formData.code = res.data.code;
@@ -68,6 +64,7 @@ export default {
          this.formData.issueAuthority = res.data.issueAuthority;
          this.formData.issueDate = res.data.issueDate;
          this.formData.name = res.data.name;
+         this.formData.unitName = res.data.unitName;
       })
     }
   },

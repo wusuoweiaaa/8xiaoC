@@ -2,7 +2,7 @@
  * @Author       : WuWei
  * @LastEditors  : WuWei
  * @Date         : 2021-04-25 20:59:42
- * @LastEditTime : 2021-04-27 20:56:49
+ * @LastEditTime : 2021-04-27 22:18:55
  * @FilePath     : /8xiaoC/src/views/health-cert/detail.vue
  * @Description  : Do not edit
 -->
@@ -31,6 +31,10 @@
     <el-row class="detail-item">
       <el-col :span="8" class="item-name">姓名:</el-col>
       <el-col :span="16" class="item-value">{{detail.name}}</el-col>
+    </el-row>
+    <el-row class="detail-item">
+      <el-col :span="8" class="item-name">单位名称:</el-col>
+      <el-col :span="16" class="item-value">{{detail.unitName}}</el-col>
     </el-row>
     </div>
 
